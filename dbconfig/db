@@ -1,0 +1,11 @@
+const mariadb = require('mysql');
+const db = mariadb.createConnection({
+  host: 'localhost',
+  user: 'root',
+  connectionLimit: 5,
+  password: '1111',
+  database: 'testbox'
+});
+db.connect();
+
+module.exports = db;
