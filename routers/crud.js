@@ -53,11 +53,12 @@ router.get('/updateForm',function(req,res){
     };//if end
 
     let list = template.list(dbData);
-    console.log('updateNo'+dbData[0].no+'updateTitle: '+dbData[0].title);
-    let body = `<form action="/page/update" method="post">
-                  <p><input type="hidden" name="no" value='+dbData[0].no+' ><input type="text" name="title" placeholder="title" value='+dbData[0].title+' /></p>
-                  <p><input type="submit"></p>
-    </form>`;
+    console.log('updateNo'+dbData[0].no+', updateTitle: '+dbData[0].title);
+    let body = '<form action="/page/update" method="post">'+
+    '<p><input type="hidden" name="no" value="'+dbData[0].no+'" >'+
+    '<input type="text" name="title" placeholder="title" value="'+dbData[0].title+'" /></p>'+
+    '<p><input type="submit"></p>'+
+    '</form>';
     let html = template.HTML(list, body);
 
     res.send(html);
