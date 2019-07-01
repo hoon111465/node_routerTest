@@ -3,10 +3,10 @@ const router = express.Router();
 const db = require('../dbconfig/db');
 const template = require('../template.js');
 
-router.get('/',function(request,response){
-  db.query('SELECT * FROM data_text', function(error, dbData){
+router.get('/',function(req,res){
+  db.query('SELECT * FROM data_text', function(err, dbData){
 
-    if(error) {
+    if(err) {
     console.log('err: '+error);
     };//if end
 
@@ -15,7 +15,7 @@ router.get('/',function(request,response){
   let html = template.HTML(list, body);
   console.log('select now');
 
-  response.send(html);
+  res.send(html);
   });//connection.query end
 });//app.get '/' end
 

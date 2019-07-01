@@ -1,16 +1,9 @@
-var http = require('http');
-//var fs = require('fs');
-var sanitizeHtml = require('sanitize-html'); //보안 라이브러리 모듈
-const template = require('./template.js');
-var url = require('url');
-var qs = require('querystring');
+const http = require('http'); //http 통신을 위한 모듈
 const express = require('express'); //node express framework
 const app = express();
 const idxRouter = require('./routers/index.js');
 const crudRouter = require('./routers/crud.js');
 const partRouter = require('./routers/part.js');
-const db = require('./dbconfig/db');
-
 
 app.use('/',idxRouter);
 app.use('/page/',crudRouter);
