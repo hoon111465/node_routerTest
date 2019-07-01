@@ -20,14 +20,28 @@ module.exports = {
   },
   //list 함수
   list:function(dbData){
-    let list = '<table border="1" style="width:300px"><thead><tr><th>번호</th><th>제목</th><th></th><th></th></tr></thead>';
+    let list = `<table border="1" style="width:300px">
+                  <thead>
+                    <tr>
+                      <th>번호</th>
+                      <th>제목</th>
+                      <th></th>
+                      <th></th>
+                    </tr>
+                  </thead>`;
     let i = 0;
     //반복하여 dbData의 갯수만큼 출력한다
     while(i < dbData.length){
-      list = list + `<tr><td>${dbData[i].no}</td><td>${dbData[i].title}</td><td><a href='/page/updateForm?no=${dbData[i].no}'>수정</a></td><td><a href='/page/deleteForm?no=${dbData[i].no}'>삭제</a></td><tr>`;
+      list = list + `<tr>
+                        <td>${dbData[i].no}</td>
+                        <td>${dbData[i].title}</td>
+                        <td><a href='/page/updateForm?no=${dbData[i].no}'>수정</a></td>
+                        <td><a href='/page/deleteForm?no=${dbData[i].no}'>삭제</a></td>
+                      <tr>`;
       i = i + 1;
     }
-    list = list+'</table>';
+    list = list+`
+        </table>`;
     return list;
   }
 };

@@ -11,7 +11,7 @@ router.get('/',function(req,res){
     };//if end
 
   let list = template.list(dbData);
-  const body = '<h2>welcome </h2>';
+  const body = '<h2>welcome node world</h2>';
   let html = template.HTML(list, body);
   console.log('select now');
 
