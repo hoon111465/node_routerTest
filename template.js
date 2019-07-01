@@ -1,4 +1,4 @@
- var sanitizeHtml = require('sanitize-html');
+const sanitizeHtml = require('sanitize-html');
 
 module.exports = {
   HTML:function(list, body){
@@ -20,8 +20,8 @@ module.exports = {
   },
   //list 함수
   list:function(dbData){
-    var list = '<table border="1" style="width:300px"><thead><tr><th>번호</th><th>제목</th><th></th><th></th></tr></thead>';
-    var i = 0;
+    let list = '<table border="1" style="width:300px"><thead><tr><th>번호</th><th>제목</th><th></th><th></th></tr></thead>';
+    let i = 0;
     //반복하여 dbData의 갯수만큼 출력한다
     while(i < dbData.length){
       list = list + `<tr><td>${dbData[i].no}</td><td>${dbData[i].title}</td><td><a href='/page/updateForm?no=${dbData[i].no}'>수정</a></td><td><a href='/page/deleteForm?no=${dbData[i].no}'>삭제</a></td><tr>`;

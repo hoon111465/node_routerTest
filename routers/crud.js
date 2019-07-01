@@ -2,8 +2,8 @@ const express = require('express'); //node express framework
 const router = express.Router();
 const db = require('../dbconfig/db');
 const template = require('../template.js');
-var qs = require('querystring');
-var url = require('url');
+const qs = require('querystring');
+const url = require('url');
 
 router.get('/insertForm',function(req,res){
   console.log('insertForm in');
