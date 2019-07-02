@@ -1,27 +1,31 @@
 const express = require('express'); //node express framework
 const router = express.Router();
-const db = require('../dbconfig/db');
-const template = require('../template.js');
-const qs = require('querystring');
-const url = require('url');
+const db = require('../dbconfig/db');  //db정보가 저장된 위치에 파일을 읽어 옴
+const template = require('../template.js');  // template정보를 위치에서 파일을 읽어 옴
+const qs = require('querystring');  //url 객체의 query와 관련된 모듈
+const url = require('url'); //url 정보를 객체로 가져와 분석하거나(parse) url 객체를 문자열로 바꿔주는 기능(format, resolve)을 수행
 
-router.get('/insertForm',function(req,res){
+router.get('/insertForm',function(req,res){ //url /page/insertForm의 주소로 이동하면
   console.log('insertForm in');
+
+  //db의 정보를 select 한다
   db.query('SELECT * FROM data_text', function(error, dbData){
 
     if(error) {                 //error가 있다면
     console.log('err: '+error);
     };//if end
 
-  let list = template.list(dbData);
+  let list = template.list(dbData); //select한 db정보를 template에 적용시켜 list변수에 저장한다
+  //body에 html을 삽입한다
   const body = `<form action="/page/insert" method="post">
                   <p><input type="text" name="title" style="width:200px" placeholder="title을 입력해주세요"/></p>
                   <p><input type="submit"></p>
                 </form>`;
-  let html = template.HTML(list, body);
+
+  let html = template.HTML(list, body); //template의 HTML메서드에 list, body 변수를 인자로 html변수에 저장한다
   console.log('move insertForm page');
 
-  res.send(html);
+  res.send(html); //http 응답으로 변수 html에 저장한 값을 보낸다
   });//connection.query end
 
 });//app.get '/insertForm' end
@@ -29,12 +33,14 @@ router.get('/insertForm',function(req,res){
 router.post('/insert',function(req,res){
   let querys ='';
   req.on('data',function(data){
-    querys += data;
+    querys += data; //querys 변수에 data를 저장
+    console.log('data: '+data);
   });//req.on 'data' end
+
   req.on('end',function(){
-    let post = qs.parse(querys);
+    let post = qs.parse(querys);//querystring 모듈을 사용하여 querys값을 post 변수에 저장
     console.log('insertData: '+post.title);
-    db.query('INSERT INTO data_text(title) VALUES('+db.escape(post.title)+')', function(error, dbData){
+    db.query('INSERT INTO data_text(title) VALUES(?)', post.title, function(error, dbData){ //쿼리가 여러개일 경우 []묶어서 쓰기
       if(error) {
       console.log('err: '+error);
       };//if end

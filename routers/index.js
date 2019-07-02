@@ -14,7 +14,7 @@ router.get('/',function(req,res){
   const body = '<h2>welcome node world</h2>';
   let html = template.HTML(list, body);
   console.log('select now');
-
+  console.log('test ..................');
   res.send(html);
   });//connection.query end
 });//app.get '/' end
